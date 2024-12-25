@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FashionCut</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            margin: 20px 0;
+            text-align: center;
+        }
+        label {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .left-section {
+            flex: 1;
+            text-align: center;
+        }
+        .left-section img {
+            width: 420px;
+            height: 620px;
+            object-fit: cover;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+        }
+        .left-section p {
+            font-size: 18px;
+            font-weight: bold;
+            color: #555;
+        }
+        .right-section {
+            flex: 1;
+        }
+        .collection {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        .collection img {
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .collection img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>FashionCut</h1>
+    <form action="/predict" method="post" enctype="multipart/form-data">
+        <label>Upload your complete photo head to foot:</label><br> 
+        <input type="file" name="myfile" accept="image/*"><br> 
+        <input type="submit" value="Next">
+    </form>
+
+    {% if label %}
+    <div class="container">
+        <!-- Left Section: Uploaded Image -->
+        <div class="left-section">
+            <img src="{{ img_path }}" alt="Uploaded Image">
+            <p>We think it's a {{ label }}</p>
+        </div>
+
+        <!-- Right Section: Collection -->
+        <div class="right-section">
+            <h2>{{ label.capitalize() }}'s Collection</h2>
+            <div class="collection">
+                {% for img in collection_images %}
+                <img src="{{ img }}" alt="Collection Item">
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+</body>
+</html>

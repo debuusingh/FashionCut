@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<body>
+
+        <h1>FashionCut</h1>
+        <form action="/predict" method="post" enctype="multipart/form-data" >
+        <label>Upload your complete photo head to foot.</label><Br> 
+            <input type="file" name="myfile"><br> 
+            <input type="submit" value="Next">
+        </form>
+
+        {% if label %}
+        <img src="{{ img_path }}">
+        <p>We think it's a {{ label }}</p>
+        {% endif %}
+
+</body>
+
+</html>
